@@ -36,7 +36,7 @@ async def run_simulation(broker_type, mqtt_qos, kafka_acks, rate, device_id):
     is_fire = True
     fire_duration_left = 60
 
-    print(f"Pokrećem simulator... Broker: {broker_type} (Device ID: {device_id})")
+    print(f"Broker: {broker_type} (Device ID: {device_id})")
     
     kafka_prod = None
     mqtt_cli = None
