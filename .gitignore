@@ -354,3 +354,5 @@ $RECYCLE.BIN/
 _NCrunch*
 
 *.csproj.lscache
+go.sum
+*.exe
