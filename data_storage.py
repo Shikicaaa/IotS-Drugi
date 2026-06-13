@@ -24,7 +24,7 @@ from backend.services.env import DATABASE_URL
 from backend.models.database.sensor_data import SensorData
 
 LOCAL_DB_URL = DATABASE_URL.replace("@db:", "@localhost:")
-
+print("LOCAL_DB_URL =", LOCAL_DB_URL)
 engine = create_async_engine(LOCAL_DB_URL, echo=False)
 SessionLocal = async_sessionmaker(bind=engine)
 
@@ -150,7 +150,7 @@ async def main():
     parser = argparse.ArgumentParser(description="IoT Data Storage Service")
     parser.add_argument("--broker", type=str, choices=["mqtt", "kafka"], required=True, help="Choose the broker")
     parser.add_argument("--mqtt-qos", type=int, choices=[0, 1, 2], default=1, help="MQTT QoS level")
-    parser.add_argument("--kafka-broker", type=str, default="localhost:9094", help="Kafka broker address")
+    parser.add_argument("--kafka-broker", type=str,  default="localhost:9094,localhost:9096,localhost:9098", help="Kafka broker address")
     parser.add_argument("--mqtt-broker", type=str, default="localhost", help="MQTT broker address")
     
     args = parser.parse_args()

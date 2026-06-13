@@ -100,7 +100,7 @@ def mqtt_connect():
 
 def kafka_connect():
     return Producer({
-        "bootstrap.servers": "localhost:9094",
+        "bootstrap.servers": "localhost:9094,localhost:9096,localhost:9098",
         "acks": "all"
     })
 
