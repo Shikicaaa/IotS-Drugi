@@ -39,7 +39,7 @@
   
   Izgubljen %:     0.00%
 
-### acks = all
+### acks = all sa 1 replikom
 
   Broker:          KAFKA (acks=all)
 
@@ -56,6 +56,24 @@
   Throughput:      986.3 msg/s
 
   Izgubljen %:     0.00%
+
+### acks = all sa 3 replike
+  Broker:          KAFKA (acks=all)
+
+  Broj uredjaja:    100
+
+  Rate/uredjaj:     10.0 msg/s
+
+  Trajanje:        30.1s
+
+  Ukupno poslato:  29,700
+
+  Neuspesno:       0
+
+  Throughput:      988.3 msg/s
+
+  Izgubljen %:     0.00%
+
 
 ## Kafka 1000 Korisnika
   
@@ -93,7 +111,7 @@
 
   Izgubljen %:     0.00%
 
-### acks = all
+### acks = all sa 1 replikom
   Broker:          KAFKA (acks=all)
 
   Broj uredjaja:    1,000
@@ -109,6 +127,24 @@
   Throughput:      9,860.7 msg/s
 
   Izgubljen %:     0.00%
+
+### acks = all sa 3 replike
+  Broker:          KAFKA (acks=all)
+
+  Broj uredjaja:    1,000
+
+  Rate/uredjaj:     10.0 msg/s
+
+  Trajanje:        30.2s
+
+  Ukupno poslato:  295,000
+
+  Neuspesno:       0
+
+  Throughput:      9,784.2 msg/s
+
+  Izgubljen %:     0.00%
+
 
 ## Kafka 10000 Korisnika
 
@@ -148,7 +184,7 @@
 
   Izgubljen %:     0.00%
 
-### acks = all
+### acks = all sa 1 replikom
   Broker:          KAFKA (acks=all)
   
   Broj uredjaja:    10,000
@@ -164,6 +200,24 @@
   Throughput:      33,616.6 msg/s
 
   Izgubljen %:     0.00%
+
+  ### acks = all sa 3 replike
+  Broker:          KAFKA (acks=all)
+
+  Broj uredjaja:    10,000
+
+  Rate/uredjaj:     10.0 msg/s
+
+  Trajanje:        30.5s
+
+  Ukupno poslato:  877,970
+
+  Neuspesno:       0
+
+  Throughput:      28,755.3 msg/s
+
+  Izgubljen %:     0.00%
+
 
 ---
 ## MQTT 100 Korisnika
@@ -319,3 +373,13 @@
   Throughput:      2,614.7 msg/s
   
   Izgubljen %:     9.56%
+
+
+
+## Opšti zaključak:
+
+Kafka linearno raste od 1K do 10K poruka u sekundi, ali sa klasterom i acks = all, dolazi do overhead-a replikacije, dok sa 1 brokerom daje isti throughput jer nemamo replikaciju.
+
+## MQTT vs Kafka throughput
+
+MQTT na 1000 uređaja daje 3000 poruka dok kafka daje skoro 10000, što ynači da je kafka 3x propusnija pri istom opterećenju. Na 10k uređaja MQTT pada na 2900 sa gubicima 9.56%, dok kafka drži poruke bez ijedne izgubljene poruke. To je zbog kafkine mogucnosti da refire poruke, a ne fire and forget.
